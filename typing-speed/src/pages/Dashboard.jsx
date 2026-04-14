@@ -39,10 +39,10 @@ export default function Dashboard() {
     try {
       const token = localStorage.getItem("token");
       const [resultsRes, userRes] = await Promise.all([
-        axios.get("http://localhost:5000/api/results/my-results", {
+        axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/results/my-results`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get("http://localhost:5000/api/auth/me", {
+        axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/auth/me`, {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);

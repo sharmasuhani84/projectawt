@@ -46,16 +46,16 @@ export default function Profile() {
       
       if (isOwnProfile) {
         const [userRes, resultsRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/auth/me", { headers: { Authorization: `Bearer ${token}` } }),
-          axios.get("http://localhost:5000/api/results/my-results", { headers: { Authorization: `Bearer ${token}` } })
+          axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/auth/me`, { headers: { Authorization: `Bearer ${token}` } }),
+          axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/results/my-results`, { headers: { Authorization: `Bearer ${token}` } })
         ]);
         setUser(userRes.data.user);
         setBio(userRes.data.user.bio || "");
         setResults(resultsRes.data);
       } else {
         const [userRes, resultsRes] = await Promise.all([
-          axios.get(`http://localhost:5000/api/users/${userId}`, { headers: { Authorization: `Bearer ${token}` } }),
-          axios.get(`http://localhost:5000/api/results/user-results/${userId}`, { headers: { Authorization: `Bearer ${token}` } })
+          axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/users/${userId}`, { headers: { Authorization: `Bearer ${token}` } }),
+          axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/results/user-results/${userId}`, { headers: { Authorization: `Bearer ${token}` } })
         ]);
         setUser(userRes.data.user);
         setBio(userRes.data.user.bio || "");
@@ -71,7 +71,7 @@ export default function Profile() {
   const handleUpdateBio = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:5000/api/users/profile", 
+      await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/users/profile`, 
         { bio }, 
         { headers: { Authorization: `Bearer ${token}` } }
       );

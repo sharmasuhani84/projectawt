@@ -161,7 +161,7 @@ function Test() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "http://localhost:5000/api/results/save", // Matches updated server.js
+        `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/results/save`, // Matches updated server.js
         {
           speed: stats.wpm,
           accuracy: stats.accuracy,

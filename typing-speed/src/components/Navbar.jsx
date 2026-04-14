@@ -53,7 +53,7 @@ export default function Navbar() {
       setIsSearching(true);
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`http://localhost:5000/api/users/search?query=${searchQuery}`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/users/search?query=${searchQuery}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setSearchResults(res.data.users);

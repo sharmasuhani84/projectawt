@@ -22,7 +22,7 @@ export default function Signup() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/auth/signup", formData);
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/auth/signup`, formData);
       navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed. Try again.");

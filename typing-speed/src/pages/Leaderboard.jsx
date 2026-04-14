@@ -28,7 +28,7 @@ export default function Leaderboard() {
   const fetchLeaderboard = async () => {
     setIsLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/results/leaderboard?filter=${filter}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/results/leaderboard?filter=${filter}`);
       setData(res.data);
     } catch (err) {
       console.error("Failed to fetch leaderboard", err);
